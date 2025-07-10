@@ -103,6 +103,34 @@ http://localhost:8000
 | 12345       | 400 Bad Request - Invalid code        |
 
 ---
+## 🔬 Testing with Postman
+
+You can use the **pre-configured Postman collection** included in this project to easily test all the routes.
+
+### 📂 Collection file:
+
+```
+collection.json
+```
+
+### ✅ Import into Postman:
+
+1. Open Postman.
+2. Click **“Import”** → **“File”** → select the `collection.json` file from this project.
+3. The collection **“FastAPI - Complete Tests”** will appear in your workspace.
+4. Click on the requests and press **“Send”** to test each route.
+
+---
+
+### 🧪 Included Requests in the Collection:
+
+| Route         | Method | Description                             |
+| ------------- | ------ | --------------------------------------- |
+| `/hello`      | GET    | Test all query parameter cases          |
+| `/top-secret` | GET    | Test header `Authorization` validation  |
+| `/welcome`    | POST   | Test body validation with `secret_code` |
+
+---
 
 ## 🔧 **Future Improvements**
 
