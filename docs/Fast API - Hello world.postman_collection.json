@@ -1,71 +1,155 @@
 {
 	"info": {
-		"_postman_id": "b6288d65-57d7-4bf5-92d0-70365428a4cf",
-		"name": "Fast API - Hello world",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "38963675"
+		"_postman_id": "12345678-1234-5678-1234-567812345678",
+		"name": "FastAPI - Complete Tests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "Hello world",
-			"protocolProfileBehavior": {
-				"disabledSystemHeaders": {
-					"accept": true
+			"name": "Hello - Full Params (Teacher Ryan)",
+			"request": {
+				"method": "GET",
+				"url": {
+					"raw": "{{base_url}}/hello?name=Ryan&is_teacher=true",
+					"host": ["{{base_url}}"],
+					"path": ["hello"],
+					"query": [
+						{"key": "name", "value": "Ryan"},
+						{"key": "is_teacher", "value": "true"}
+					]
 				}
-			},
+			}
+		},
+		{
+			"name": "Hello - Full Params (Rakoto, not teacher)",
+			"request": {
+				"method": "GET",
+				"url": {
+					"raw": "{{base_url}}/hello?name=Rakoto&is_teacher=false",
+					"host": ["{{base_url}}"],
+					"path": ["hello"],
+					"query": [
+						{"key": "name", "value": "Rakoto"},
+						{"key": "is_teacher", "value": "false"}
+					]
+				}
+			}
+		},
+		{
+			"name": "Hello - No Params (Default Hello world)",
+			"request": {
+				"method": "GET",
+				"url": {
+					"raw": "{{base_url}}/hello",
+					"host": ["{{base_url}}"],
+					"path": ["hello"]
+				}
+			}
+		},
+		{
+			"name": "Hello - Only Name",
+			"request": {
+				"method": "GET",
+				"url": {
+					"raw": "{{base_url}}/hello?name=Ryan",
+					"host": ["{{base_url}}"],
+					"path": ["hello"],
+					"query": [
+						{"key": "name", "value": "Ryan"}
+					]
+				}
+			}
+		},
+		{
+			"name": "Hello - Only is_teacher",
+			"request": {
+				"method": "GET",
+				"url": {
+					"raw": "{{base_url}}/hello?is_teacher=true",
+					"host": ["{{base_url}}"],
+					"path": ["hello"],
+					"query": [
+						{"key": "is_teacher", "value": "true"}
+					]
+				}
+			}
+		},
+		{
+			"name": "Top Secret - Correct Auth",
 			"request": {
 				"method": "GET",
 				"header": [
 					{
-						"key": "Accept",
-						"value": "text/plain",
-						"type": "text"
+						"key": "Authorization",
+						"value": "my-secret-key"
 					}
 				],
 				"url": {
-					"raw": "{{base_url}}/hello",
-					"host": [
-						"{{base_url}}"
-					],
-					"path": [
-						"hello"
-					]
+					"raw": "{{base_url}}/top-secret",
+					"host": ["{{base_url}}"],
+					"path": ["top-secret"]
 				}
-			},
-			"response": []
+			}
 		},
 		{
-			"name": "Welcome",
+			"name": "Top Secret - Incorrect Auth",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "wrong-key"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/top-secret",
+					"host": ["{{base_url}}"],
+					"path": ["top-secret"]
+				}
+			}
+		},
+		{
+			"name": "Welcome - Valid Secret Code",
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{"key": "Content-Type", "value": "application/json"}
+				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"name\": \"Ryan\"}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
+					"raw": "{\"secret_code\": 1234}"
 				},
 				"url": {
 					"raw": "{{base_url}}/welcome",
-					"host": [
-						"{{base_url}}"
-					],
-					"path": [
-						"welcome"
-					]
+					"host": ["{{base_url}}"],
+					"path": ["welcome"]
 				}
-			},
-			"response": []
+			}
+		},
+		{
+			"name": "Welcome - Invalid Secret Code",
+			"request": {
+				"method": "POST",
+				"header": [
+					{"key": "Content-Type", "value": "application/json"}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"secret_code\": 123}"
+				},
+				"url": {
+					"raw": "{{base_url}}/welcome",
+					"host": ["{{base_url}}"],
+					"path": ["welcome"]
+				}
+			}
 		}
 	],
 	"variable": [
 		{
 			"key": "base_url",
-			"value": "http://localhost:8000",
-			"type": "default"
+			"value": "http://localhost:8000"
 		}
 	]
 }
+
